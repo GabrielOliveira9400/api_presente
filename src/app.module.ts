@@ -1,22 +1,15 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PresentesModule } from './presentes.module';
-const { database, host, port, user, password } = process.env;
+import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './database.module';
+import { PresentesModule } from './presentes.module'; // Exemplo
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres', // ou mysql/sqlite
-      host: host,
-      port: +port,
-      username: user,
-      password: password,
-      database: database,
-      autoLoadEntities: true,
-      synchronize: true, // ⚠️ apenas em dev
-      ssl: {
-        rejectUnauthorized: false,
-      },
+    ConfigModule.forRoot({
+      isGlobal: true, // Essencial para fácil acesso em outros módulos!
     }),
+    DatabaseModule,
     PresentesModule,
   ],
 })
