@@ -11,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get<string>('HOST'), // Pega a variável do Render
-        port: configService.get<number>('PORT',5432), // Pega a variável do Render
+        port: 5432, // Pega a variável do Render
         username: 'gabriel', // Pega a variável do Render
         password: configService.get<string>('PASSWORD'), // Pega a variável do Render
         database: configService.get<string>('DATABASE'), // Pega a variável do Render
